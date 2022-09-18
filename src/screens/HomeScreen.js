@@ -17,7 +17,7 @@ import BannerSlider from '../components/BannerSlider';
 import CustomSwitch from '../components/CustomSwitch';
 import ListItem from '../components/ListItem';
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   const [gamesTab, setGamesTab] = useState(1);
   const randerBanner = ({item, index}) => {
     return <BannerSlider data={item} />;
@@ -30,11 +30,13 @@ export default function HomeScreen() {
       <ScrollView style={styles.scroll}>
         <View style={styles.judul}>
           <Text style={styles.nama}>Hello Muji Rahman</Text>
-          <ImageBackground
-            source={require('../assets/images/user-profile.jpg')}
-            style={styles.imgNama}
-            imageStyle={{borderRadius: 25}}
-          />
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <ImageBackground
+              source={require('../assets/images/user-profile.jpg')}
+              style={styles.imgNama}
+              imageStyle={{borderRadius: 25}}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.search}>
           <Feather
@@ -74,6 +76,12 @@ export default function HomeScreen() {
                 subTitle={item.subtitle}
                 isFree={item.isFree}
                 keyExtractor={item.id}
+                onPress={() =>
+                  navigation.navigate('GameDetail', {
+                    title: item.title,
+                    id: item.id,
+                  })
+                }
               />
             ))
           : paidGames.map(item => (
@@ -85,6 +93,12 @@ export default function HomeScreen() {
                 isFree={item.isFree}
                 price={item.price}
                 keyExtractor={item.id}
+                onPress={() =>
+                  navigation.navigate('GameDetail', {
+                    title: item.title,
+                    id: item.id,
+                  })
+                }
               />
             ))}
       </ScrollView>
