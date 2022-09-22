@@ -81,9 +81,7 @@ const TabNavigator = () => {
 };
 
 const getTabBarVisibility = route => {
-  console.log('isi router-->', route);
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
-  console.log('isi router2-->', routeName);
   switch (routeName) {
     case 'GameDetail':
       return 'none';
